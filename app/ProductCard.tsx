@@ -1,23 +1,31 @@
-import Image, {StaticImageData} from 'next/image'
-import Link from "next/link"
+"use client"
+import { Image as IImage} from 'sanity'
+import { client } from '@/sanity/lib/client'
+import { urlForImage } from '@/sanity/lib/image';
+import Image from 'next/image';
+import { FC } from 'react';
 
-function ProductCard(props:{
-  title: string; 
-  price:number;
-  img:StaticImageData; 
-  category:string; 
-  id: number
-}) {
-  return (
-    <Link href={`/products/${props.id}`}>
-      <div className='py-5 z-20 transform-gpu cursor-pointer transition-transform duration-500 ease-in-out hover:scale-110 md:block'>
-        <Image src={props.img} alt='product'/>
-        <h3 className='font-bold text-lg mt-3'>{props.title}</h3>
-        <p className='font-bold text-lg'>${props.price}</p>
-        <p className='text-base font-normal capitalize'>Category: <span className='text-base font-normal'>{props.category}</span></p>
-    </div>
-    </Link>
-  )
+const ProductCard:FC<{item: any}> = ({item}) => {
+
+  const handleAddToCart = async () => {
+    const res = await fetch("/api/cart", {
+      method: "POST",
+      body: JSON.stringify({
+        product_id: item._id,
+      })
+    })
+    const result = await res.json()
+    console.log(result);
+  }
+    return (
+          // <div className='py-5 z-20 transform-gpu cursor-pointer transition-transform duration-500 ease-in-out hover:scale-110 md:block'>
+          <div>
+                <Image src={urlForImage(item.image).url()} alt="product" width={300} height={300} />
+                <h2>{item.title}</h2>
+                <h3>${item.price}</h3>
+                <button onClick={handleAddToCart} className='border py-2 px-6 rounded bg-blue-600 text-white'>Add to Cart</button>
+            </div>
+    )
 }
 
 export default ProductCard
