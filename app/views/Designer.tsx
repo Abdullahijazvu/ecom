@@ -1,5 +1,5 @@
 import Image from "next/image"
-import P4 from '@/public/4th.jpg'
+import P4 from '@/public/4th-4.jpg'
 
 const Designer = () => {
   return (

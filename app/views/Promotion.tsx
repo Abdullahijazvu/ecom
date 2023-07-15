@@ -1,7 +1,7 @@
 import Image from "next/image"
-import P1 from '@/public/1st.jpg'
-import P2 from '@/public/2nd.jpg'
-import P3 from '@/public/3rd.jpg'
+import P1 from '@/public/1st-1.jpg'
+import P2 from '@/public/2nd-2.jpg'
+import P3 from '@/public/3rd-3.jpg'
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 
