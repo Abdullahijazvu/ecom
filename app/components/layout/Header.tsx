@@ -9,9 +9,12 @@ import { useState } from "react"
 import {GiHamburgerMenu} from 'react-icons/gi'
 import {IoMdClose} from'react-icons/io'
 import Expand from "./Expand"
+import { useSelector } from "react-redux";
+import { RootState } from "@/app/store/store"
 
 const Header = () => {
     const [isNavbarOpen, setNavbarOpen] = useState(false);
+  const cartValue = useSelector((state: RootState) => state.cart.totalQuantity);
     // const [searchQuery, setSearchQuery] = useState("");
   return (
     <div className="flex justify-between items-center py-6 px-8">
@@ -33,7 +36,10 @@ const Header = () => {
           placeholder="Search in our Store"
           />
         </div>
-        <div className="h-10 w-10 rounded-full bg-gray-200 flex justify-center items-center">
+        <div className="h-10 w-10 rounded-full bg-gray-200 flex justify-center items-center relative">
+        <span className="absolute right-1 top-0 rounded-full bg-red-500 h-5 w-5 text-white text-sx text-center">
+          {cartValue}
+        </span>
             <ShoppingCart />
         </div>
           </div>

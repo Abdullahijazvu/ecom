@@ -2,13 +2,14 @@ import Quantity from '@/app/components/Quantity'
 import { Products } from '@/app/utils/mock'
 import { StaticImageData } from 'next/image'
 import Image from 'next/image'
+import AddToCart from '@/app/components/AddToCart'
 
-const sizes = ['XS','SM','MD','LG','XL']
 
 const getProductsDetail=(id: number | string)=>{
-    return Products.filter((product)=>product.id === id)
+  return Products.filter((product)=>product.id == id)
 }
 
+const sizes = ['XS','SM','MD','LG','XL']
 export default function Page({params}:{params: {id: string}}){
     const result = getProductsDetail(params.id)
     
@@ -28,8 +29,8 @@ export default function Page({params}:{params: {id: string}}){
                   <h3 className='text-sm mt-6 font-semibold'>SELECT SIZE</h3>
                   <div className='flex gap-x-3'>
                   {sizes.map((item)=>
-                      <div className='center w-6 h-6 mt-2 duration-300 border rounded-full hover:shadow-xl'>
-                      <span className='text-[10px] font-semibold text-center text-gray-600'>{item}</span>
+                      <div key={item} className='center w-6 h-6 mt-2 duration-300 border rounded-full hover:shadow-xl'>
+                      <span className='text-[10px] cursor-pointer font-semibold text-center text-gray-600'>{item}</span>
                     </div>)
                   }
                   </div>
@@ -38,13 +39,11 @@ export default function Page({params}:{params: {id: string}}){
                     <Quantity/>
                   </div>
                   <div className='flex items-center mt-5 gap-x-4'>
-                    {/* <AddtoCart/> */}
+                    <AddToCart/>
                     <h2 className='text-2xl font-bold '>${product.price.toFixed(2)}</h2>
                   </div>
                 </div>
                 </div>
-                  {/* <p>Price: {product.price}</p>
-                  <p>Category: {product.category}</p> */}
             </div>
     ))}
     </div>
