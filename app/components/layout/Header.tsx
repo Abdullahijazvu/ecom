@@ -10,12 +10,23 @@ import {GiHamburgerMenu} from 'react-icons/gi'
 import {IoMdClose} from'react-icons/io'
 import Expand from "./Expand"
 import { useSelector } from "react-redux";
+import Cart from "@/app/views/Cart"
 import { RootState } from "@/app/store/store"
+import { useRouter } from "next/navigation"
 
 const Header = () => {
-    const [isNavbarOpen, setNavbarOpen] = useState(false);
+  const [isNavbarOpen, setNavbarOpen] = useState(false);
   const cartValue = useSelector((state: RootState) => state.cart.totalQuantity);
-    // const [searchQuery, setSearchQuery] = useState("");
+  // const [searchQuery, setSearchQuery]= useState("")
+
+  // function handleSearchCalledFunc(e:any){
+  //   console.log(e.key, e.keyCode);
+  //   if(e.key === "Enter"){
+  //     router.push(`/search/${searchQuery}`)
+  //     console.log("enter");
+  //   }
+    
+  // }
   return (
     <div className="flex justify-between items-center py-6 px-8">
       <Link href={"/"}>
@@ -32,16 +43,21 @@ const Header = () => {
           <BiSearch/>
           <input
           type="text"
+          // value={searchQuery}
+          // onKeyDown={handleSearchCalledFunc}
+          // onChange={(e)=>setSearchQuery(e.target.value)}
           className="pl-1 pr-5 py-1 w-80"
           placeholder="Search in our Store"
           />
         </div>
+        <a href="/cart">
         <div className="h-10 w-10 rounded-full bg-gray-200 flex justify-center items-center relative">
         <span className="absolute right-1 top-0 rounded-full bg-red-500 h-5 w-5 text-white text-sx text-center">
           {cartValue}
         </span>
             <ShoppingCart />
         </div>
+        </a>
           </div>
           <div className="cursor-pointer" onClick={()=> setNavbarOpen(!isNavbarOpen)}>
             {isNavbarOpen ?
