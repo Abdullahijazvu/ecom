@@ -4,7 +4,7 @@ import P1 from '@/public/product-1.webp'
 export const Products: Product[] = [
     {
         id:"1",
-        name: "Product 1",
+        name: "Product-1",
         tagline: "Dress",
         category: "female",
         price: 100,
